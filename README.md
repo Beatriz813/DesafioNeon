@@ -6,6 +6,7 @@
 O processador recupera um lote de transações de depósito para validar e efetivar cada um deles.
 
 As contas cadastradas são recuperadas da seguinte API: https://run.mocky.io/v3/7f0acd4b-e63d-4571-b834-c3db15f70673
+
 O lote de transações é recuperado da seguinte API: https://run.mocky.io/v3/68cc9f8b-519b-4057-bf3c-804115e68fd4
 
 Neste serviço é validado as seguintes informações:
