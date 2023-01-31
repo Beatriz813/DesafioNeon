@@ -12,9 +12,5 @@ namespace Processador.Deposito.Core.ObjetosValor
             Retorno = retorno;
             Status = status;
         }
-
-        
     }
-
-
 }
