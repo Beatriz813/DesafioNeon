@@ -33,6 +33,9 @@ namespace Processador.Deposito.Core.Ports.UseCase.Processar
 
             foreach (var transacao in LoteTransacao)
             {
+                transacao.ContaClienteOrigem = _clienteContasHttp.RecuperaConta(transacao.AgenciaOrigem, transacao.NumeroContaOrigem);
+                transacao.ContaClienteDestino = _clienteContasHttp.RecuperaConta(transacao.AgenciaDestino, transacao.NumeroContaDestino);
+
                 var validacao = await ValidaDepositoAsync(transacao);
                 if (validacao.Status is not EnumStatus.SUCESSO)
                     continue;
@@ -41,11 +44,8 @@ namespace Processador.Deposito.Core.Ports.UseCase.Processar
             }
         }
 
-        private async Task<BaseRetorno> ValidaDepositoAsync(TransacaoDeposito transacao)
+        public async Task<BaseRetorno> ValidaDepositoAsync(TransacaoDeposito transacao)
         {
-            transacao.ContaClienteOrigem = _clienteContasHttp.RecuperaConta(transacao.AgenciaOrigem, transacao.NumeroContaOrigem);
-            transacao.ContaClienteDestino = _clienteContasHttp.RecuperaConta(transacao.AgenciaDestino, transacao.NumeroContaDestino);
-
             if (transacao.ContaClienteOrigem is null)
             {
                 await RegistraLogErroAsync(transacao, "Conta de origem inexistente", EnumStatus.NEGOCIO);
@@ -63,26 +63,42 @@ namespace Processador.Deposito.Core.Ports.UseCase.Processar
                 return new BaseRetorno("", Enums.EnumStatus.NEGOCIO);
             }
 
-            bool verificacaoNumerosAgencia = Regex.IsMatch(transacao.AgenciaDestino, "^[0-9]+$");
+            bool verificacaoNumerosAgencia = Regex.IsMatch(transacao.AgenciaDestino, "[^0-9]");
 
-            bool verificacaoNumerosConta = Regex.IsMatch(transacao.NumeroContaDestino, "^[0-9]+$");
+            bool verificacaoNumerosConta = Regex.IsMatch(transacao.NumeroContaDestino, "[^0-9]");
 
             if (String.IsNullOrEmpty(transacao.AgenciaDestino) || verificacaoNumerosAgencia)
             {
-                await RegistraLogErroAsync(transacao, "Agencia de destino precisa ser informada", EnumStatus.NEGOCIO);
-                return new BaseRetorno("", Enums.EnumStatus.NEGOCIO);
+                await RegistraLogErroAsync(transacao, "Agencia de destino inválida", EnumStatus.NEGOCIO);
+                return new BaseRetorno("Agencia de destino inválida", Enums.EnumStatus.NEGOCIO);
             }
 
             if (String.IsNullOrEmpty(transacao.NumeroContaDestino) || verificacaoNumerosConta)
             {
-                await RegistraLogErroAsync(transacao, "Conta de destino precisa ser informada.", EnumStatus.NEGOCIO);
-                return new BaseRetorno("", Enums.EnumStatus.NEGOCIO);
+                await RegistraLogErroAsync(transacao, "Conta de destino inválida.", EnumStatus.NEGOCIO);
+                return new BaseRetorno("Conta de destino inválida.", Enums.EnumStatus.NEGOCIO);
+            }
+
+            bool verificacaoNumerosAgenciaOrigem = Regex.IsMatch(transacao.AgenciaOrigem, "[^0-9]");
+
+            bool verificacaoNumerosContaOrigem = Regex.IsMatch(transacao.NumeroContaOrigem, "[^0-9]");
+
+            if (String.IsNullOrEmpty(transacao.AgenciaOrigem) || verificacaoNumerosAgenciaOrigem)
+            {
+                await RegistraLogErroAsync(transacao, "Agencia de origem inválida", EnumStatus.NEGOCIO);
+                return new BaseRetorno("Agencia de origem inválida", Enums.EnumStatus.NEGOCIO);
+            }
+
+            if (String.IsNullOrEmpty(transacao.NumeroContaOrigem) || verificacaoNumerosContaOrigem)
+            {
+                await RegistraLogErroAsync(transacao, "Conta de origem inválida.", EnumStatus.NEGOCIO);
+                return new BaseRetorno("Conta de origem inválida.", Enums.EnumStatus.NEGOCIO);
             }
 
             if (transacao.Valor <= 0)
             {
                 await RegistraLogErroAsync(transacao, $"O valor {transacao.Valor} não pode ser depositado.", EnumStatus.NEGOCIO);
-                return new BaseRetorno("", Enums.EnumStatus.NEGOCIO);
+                return new BaseRetorno($"O valor {transacao.Valor} não pode ser depositado.", Enums.EnumStatus.NEGOCIO);
             }
             return new BaseRetorno("Validação feita com sucesso");
         }

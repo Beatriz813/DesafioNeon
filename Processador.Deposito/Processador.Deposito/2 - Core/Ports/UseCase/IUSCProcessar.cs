@@ -1,9 +1,11 @@
-﻿using Processador.Deposito.Core.ObjetosValor;
+﻿using Processador.Deposito.Core.Entidades;
+using Processador.Deposito.Core.ObjetosValor;
 
 namespace Processador.Deposito.Core.Ports.UseCase
 {
     public interface IUSCProcessar
     {
         ValueTask Processar();
+        Task<BaseRetorno> ValidaDepositoAsync(TransacaoDeposito transacao);
     }
 }

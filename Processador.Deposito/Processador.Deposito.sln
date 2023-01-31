@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Processador.Deposito", "Processador.Deposito\Processador.Deposito.csproj", "{F472C56A-B809-4ECC-B4DA-58D0B30FD90A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Processador.Deposito.Testes", "Processador.Deposito.Testes\Processador.Deposito.Testes.csproj", "{CABEA671-F6FC-4A00-ACE4-BFCBC0185F1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F472C56A-B809-4ECC-B4DA-58D0B30FD90A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F472C56A-B809-4ECC-B4DA-58D0B30FD90A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F472C56A-B809-4ECC-B4DA-58D0B30FD90A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CABEA671-F6FC-4A00-ACE4-BFCBC0185F1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CABEA671-F6FC-4A00-ACE4-BFCBC0185F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CABEA671-F6FC-4A00-ACE4-BFCBC0185F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CABEA671-F6FC-4A00-ACE4-BFCBC0185F1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
