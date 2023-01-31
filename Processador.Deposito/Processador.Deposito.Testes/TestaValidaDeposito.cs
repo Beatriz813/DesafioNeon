@@ -8,14 +8,6 @@ namespace Processador.Deposito.Testes
 {
     public class TestaValidaDeposito
     {
-        private readonly IUSCProcessar _uscProcessar;
-        public TestaValidaDeposito()
-        {
-            var serviceCollection = new ServiceCollection();
-            serviceCollection.RegistraServicos();
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-            _uscProcessar = serviceProvider.GetRequiredService<IUSCProcessar>();
-        }
         [Fact]
         public void ContaOrigemInexistenteRetornaErroNegocio ()
         {
@@ -40,7 +32,7 @@ namespace Processador.Deposito.Testes
                 ContaClienteOrigem = null
             };
 
-            BaseRetorno retorno =  _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno =  transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == "Conta de origem inexistente");
         }
@@ -69,7 +61,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno =  _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == "Conta de destino inexistente");
         }
@@ -104,7 +96,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno =  _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == "Nome do recebedor informado não é igual ao cadastrado");
         }
@@ -139,7 +131,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno =  _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == "Agencia de destino inválida");
         }
@@ -174,7 +166,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno = _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == "Agencia de destino inválida");
         }
@@ -209,7 +201,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno = _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == "Conta de destino inválida.");
         }
@@ -244,7 +236,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno = _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == "Conta de destino inválida.");
         }
@@ -279,7 +271,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno = _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == "Conta de origem inválida.");
         }
@@ -314,7 +306,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno = _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == "Conta de origem inválida.");
         }
@@ -349,7 +341,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno = _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == "Agencia de origem inválida");
         }
@@ -384,7 +376,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno = _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == "Agencia de origem inválida");
         }
@@ -419,7 +411,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno = _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == $"O valor {transacao.Valor} não pode ser depositado.");
         }
@@ -454,7 +446,7 @@ namespace Processador.Deposito.Testes
                 }
             };
 
-            BaseRetorno retorno = _uscProcessar.ValidaDeposito(transacao);
+            BaseRetorno retorno = transacao.ValidaDeposito();
 
             Assert.True(retorno.Status == EnumStatus.NEGOCIO && retorno.Retorno == $"O valor {transacao.Valor} não pode ser depositado.");
         }

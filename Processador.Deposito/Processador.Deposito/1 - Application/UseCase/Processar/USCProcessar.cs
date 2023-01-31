@@ -36,7 +36,7 @@ namespace Processador.Deposito.Core.Ports.UseCase.Processar
                 transacao.ContaClienteOrigem = _clienteContasHttp.RecuperaConta(transacao.AgenciaOrigem, transacao.NumeroContaOrigem);
                 transacao.ContaClienteDestino = _clienteContasHttp.RecuperaConta(transacao.AgenciaDestino, transacao.NumeroContaDestino);
 
-                var validacao = ValidaDeposito(transacao);
+                var validacao = transacao.ValidaDeposito();
                 if (validacao.Status is not EnumStatus.SUCESSO)
                 {
                     await RegistraLogErroAsync(transacao, validacao.Retorno, EnumStatus.NEGOCIO);
@@ -45,42 +45,6 @@ namespace Processador.Deposito.Core.Ports.UseCase.Processar
 
                 EfetivarDeposito(transacao);
             }
-        }
-
-        public BaseRetorno ValidaDeposito(TransacaoDeposito transacao)
-        {
-            if (transacao.ContaClienteOrigem is null)
-                return new BaseRetorno("Conta de origem inexistente", Enums.EnumStatus.NEGOCIO);
-            if (transacao.ContaClienteDestino is null)
-                return new BaseRetorno("Conta de destino inexistente", Enums.EnumStatus.NEGOCIO);
-
-            if (transacao.Nome != transacao.ContaClienteDestino.Nome)
-                return new BaseRetorno("Nome do recebedor informado não é igual ao cadastrado", Enums.EnumStatus.NEGOCIO);
-
-            bool numerosAgenciaComCaractere = Regex.IsMatch(transacao.AgenciaDestino, "[^0-9]");
-
-            bool numerosContaComCaractere = Regex.IsMatch(transacao.NumeroContaDestino, "[^0-9]");
-
-            if (String.IsNullOrWhiteSpace(transacao.AgenciaDestino) || numerosAgenciaComCaractere)
-                return new BaseRetorno("Agencia de destino inválida", Enums.EnumStatus.NEGOCIO);
-
-            if (String.IsNullOrWhiteSpace(transacao.NumeroContaDestino) || numerosContaComCaractere)
-                return new BaseRetorno("Conta de destino inválida.", Enums.EnumStatus.NEGOCIO);
-
-            bool numerosAgenciaOrigemComCaractere = Regex.IsMatch(transacao.AgenciaOrigem, "[^0-9]");
-
-            bool numerosContaOrigemComCaractere = Regex.IsMatch(transacao.NumeroContaOrigem, "[^0-9]");
-
-            if (String.IsNullOrWhiteSpace(transacao.AgenciaOrigem) || numerosAgenciaOrigemComCaractere)
-                return new BaseRetorno("Agencia de origem inválida", Enums.EnumStatus.NEGOCIO);
-
-            if (String.IsNullOrWhiteSpace(transacao.NumeroContaOrigem) || numerosContaOrigemComCaractere)
-                return new BaseRetorno("Conta de origem inválida.", Enums.EnumStatus.NEGOCIO);
-
-            if (transacao.Valor <= 0)
-                return new BaseRetorno($"O valor {transacao.Valor} não pode ser depositado.", Enums.EnumStatus.NEGOCIO);
-            
-            return new BaseRetorno("Validação feita com sucesso");
         }
 
         private async void EfetivarDeposito(TransacaoDeposito transacao)
