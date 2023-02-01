@@ -3,9 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Processador.Deposito", "Processador.Deposito\Processador.Deposito.csproj", "{F472C56A-B809-4ECC-B4DA-58D0B30FD90A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Processador.Deposito", "Processador.Deposito\Processador.Deposito.csproj", "{F472C56A-B809-4ECC-B4DA-58D0B30FD90A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Processador.Deposito.Testes", "Processador.Deposito.Testes\Processador.Deposito.Testes.csproj", "{CABEA671-F6FC-4A00-ACE4-BFCBC0185F1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Processador.Deposito.Testes", "Processador.Deposito.Testes\Processador.Deposito.Testes.csproj", "{CABEA671-F6FC-4A00-ACE4-BFCBC0185F1D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deposito.Core", "Deposito.Core\Deposito.Core.csproj", "{C342E07F-DE75-4B33-847F-CBAAB150A8BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{3B2CE456-7E5E-45DE-B4B7-344ADCD4B1E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email.Adapter", "Email.Adapter\Email.Adapter.csproj", "{15E6B637-10A7-4885-A1A2-C190E87C081D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClienteAdapter", "HttpClienteAdapter\HttpClienteAdapter.csproj", "{19358433-8775-4E4B-B7DA-ED969C846DBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongo.Adapter", "Mongo.Adapter\Mongo.Adapter.csproj", "{9E64AD7B-F20E-480B-A164-E7229D2CC6F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +31,30 @@ Global
 		{CABEA671-F6FC-4A00-ACE4-BFCBC0185F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CABEA671-F6FC-4A00-ACE4-BFCBC0185F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CABEA671-F6FC-4A00-ACE4-BFCBC0185F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C342E07F-DE75-4B33-847F-CBAAB150A8BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C342E07F-DE75-4B33-847F-CBAAB150A8BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C342E07F-DE75-4B33-847F-CBAAB150A8BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C342E07F-DE75-4B33-847F-CBAAB150A8BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E6B637-10A7-4885-A1A2-C190E87C081D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E6B637-10A7-4885-A1A2-C190E87C081D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E6B637-10A7-4885-A1A2-C190E87C081D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E6B637-10A7-4885-A1A2-C190E87C081D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19358433-8775-4E4B-B7DA-ED969C846DBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19358433-8775-4E4B-B7DA-ED969C846DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19358433-8775-4E4B-B7DA-ED969C846DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19358433-8775-4E4B-B7DA-ED969C846DBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E64AD7B-F20E-480B-A164-E7229D2CC6F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E64AD7B-F20E-480B-A164-E7229D2CC6F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E64AD7B-F20E-480B-A164-E7229D2CC6F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E64AD7B-F20E-480B-A164-E7229D2CC6F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{15E6B637-10A7-4885-A1A2-C190E87C081D} = {3B2CE456-7E5E-45DE-B4B7-344ADCD4B1E4}
+		{19358433-8775-4E4B-B7DA-ED969C846DBF} = {3B2CE456-7E5E-45DE-B4B7-344ADCD4B1E4}
+		{9E64AD7B-F20E-480B-A164-E7229D2CC6F3} = {3B2CE456-7E5E-45DE-B4B7-344ADCD4B1E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {82D1B0F7-5B46-49A8-AB68-0DC0D163EB41}

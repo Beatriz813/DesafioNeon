@@ -12,4 +12,11 @@
     <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Deposito.Core\Deposito.Core.csproj" />
+    <ProjectReference Include="..\Email.Adapter\Email.Adapter.csproj" />
+    <ProjectReference Include="..\HttpClienteAdapter\HttpClienteAdapter.csproj" />
+    <ProjectReference Include="..\Mongo.Adapter\Mongo.Adapter.csproj" />
+  </ItemGroup>
+
 </Project>

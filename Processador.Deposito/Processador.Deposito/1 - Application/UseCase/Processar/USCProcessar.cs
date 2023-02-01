@@ -39,7 +39,7 @@ namespace Processador.Deposito.Core.Ports.UseCase.Processar
                 var validacao = transacao.ValidaDeposito();
                 if (validacao.Status is not EnumStatus.SUCESSO)
                 {
-                    await RegistraLogErroAsync(transacao, validacao.Retorno, EnumStatus.NEGOCIO);
+                    await RegistraLogErroAsync(transacao, validacao.Retorno, validacao.Status);
                     continue;
                 }
 
