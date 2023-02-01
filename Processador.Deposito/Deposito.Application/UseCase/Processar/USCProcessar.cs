@@ -6,7 +6,6 @@ using Processador.Deposito.Core.Ports.Adapters.Email;
 using Processador.Deposito.Core.Ports.Adapters.HttpCliente;
 using Processador.Deposito.Core.Ports.Adapters.Mongo.Repository;
 using System.Text.Json;
-using System.Text.RegularExpressions;
 
 namespace Processador.Deposito.Core.Ports.UseCase.Processar
 {
