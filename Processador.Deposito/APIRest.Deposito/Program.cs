@@ -1,6 +1,6 @@
-using APIRest.Deposito.Adapters.Mongo;
-using APIRest.Deposito.Core.Ports.Adapters.Mongo;
 using APIRest.Deposito.Endpoint;
+using Processador.Deposito.Adapters.Mongo.Repository;
+using Processador.Deposito.Core.Ports.Adapters.Mongo.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ILogTransacaoRepository, LogTransacaoRepository>();
+builder.Services.AddScoped<ILogRepository, LogRepository>();
 
 var app = builder.Build();
 

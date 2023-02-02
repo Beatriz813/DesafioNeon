@@ -23,5 +23,20 @@ namespace Processador.Deposito.Adapters.Mongo.Repository
             };
             await _logTransacao.InsertOneAsync(log);
         }
+
+        public async ValueTask<List<LogTransacao>> RecuperaLogsPorId(string idTransacao)
+        {
+            return (await _logTransacao.FindAsync(log => log.Transacao.Id == idTransacao)).ToList();
+        }
+
+        public async ValueTask<List<LogTransacao>> RecuperaLogsPorStatus(EnumStatus status)
+        {
+            return (await _logTransacao.FindAsync(log => log.Status == status)).ToList();
+        }
+
+        public async ValueTask<List<LogTransacao>> RecuperaTodosLogs()
+        {
+            return (await _logTransacao.FindAsync(l => true)).ToList();
+        }
     }
 }

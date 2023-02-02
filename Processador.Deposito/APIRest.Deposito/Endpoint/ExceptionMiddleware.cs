@@ -1,4 +1,5 @@
-﻿using APIRest.Deposito.Core.ObjetosValor;
+﻿using Processador.Deposito.Core.Enums;
+using Processador.Deposito.Core.ObjetosValor;
 
 namespace APIRest.Deposito.Endpoint
 {
@@ -21,7 +22,7 @@ namespace APIRest.Deposito.Endpoint
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                BaseRetorno obj = new BaseRetorno("Erro de sistema.", Core.Enums.EnumStatus.SISTEMA);
+                BaseRetorno obj = new BaseRetorno("Erro de sistema.", EnumStatus.SISTEMA);
 
                 context.Response.StatusCode = 500;
                 await context.Response.WriteAsJsonAsync<BaseRetorno>(obj);
